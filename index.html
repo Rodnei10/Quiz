@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        .certa { background-color: green; }
+        .errada { background-color: red; }
+    </style>
+    <script>
+        var timeLeft = 20;
+        var timerId = setInterval(countdown, 1000);
+
+        function countdown() {
+            if (timeLeft == 0) {
+                clearTimeout(timerId);
+                checkAnswers();
+            } else {
+                document.getElementById('tempo').innerHTML = timeLeft + ' segundos restantes';
+                timeLeft--;
+            }
+        }
+
+        function checkAnswers() {
+            var score = 0;
+            var q1 = document.querySelector('input[name="q1"]:checked');
+            var q2 = document.querySelector('input[name="q2"]:checked');
+            var q3 = document.querySelector('input[name="q3"]:checked');
+
+            if (q1.value == "certa") { score++; q1.parentNode.classList.add('certa'); }
+            else { q1.parentNode.classList.add('errada'); }
+            if (q2.value == "certa") { score++; q2.parentNode.classList.add('certa'); }
+            else { q2.parentNode.classList.add('errada'); }
+            if (q3.value == "certa") { score++; q3.parentNode.classList.add('certa'); }
+            else { q3.parentNode.classList.add('errada'); }
+
+            alert("Você acertou " + score + " de 3 perguntas!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <h3>Você terá dez segundos para responder as perguntas!</h3>
+    <h3 id="tempo"></h3>
+    <ol>
+        <li>Quem descobriu o Brasil ?</li>
+        <div><input type ="radio" name = "q1" value="certa"><label>Pedro Alvares Cabral</label></div>
+        <div><input type ="radio" name = "q1" value="errada"><label>Tiradentes</label></div>
+        <div><input type ="radio" name = "q1" value="errada"><label>Cristovão</label></div>
+        <div><input type ="radio" name = "q1" value="errada"><label>Henrique II</label></div>
+        <br>
+    
+        <li>Quem foi o inventor da tecnologia moderna ?</li>
+        <div><input type ="radio" name = "q2" value="errada"><label> Thomas Edison</label></div>
+        <div><input type ="radio" name = "q2" value="errada"><label>Marie Curie</label></div>
+        <div><input type ="radio" name = "q2" value="errada"><label>Tim Barnes </label></div>
+        <div><input type ="radio" name = "q2" value="certa"><label>Alan Turner</label></div>
+        <br>
+        <li>Quem é conhecido como o "Pai do Marketing" digital ?</li>
+        <div><input type ="radio" name = "q3" value="certa"><label>Philip Kotler</label></div>
+        <div><input type ="radio" name = "q3" value="errada"><label>Peter Drucker</label></div>
+        <div><input type ="radio" name = "q3" value="errada"><label>Seth Godin </label></div>
+        <div><input type ="radio" name = "q3" value="errada"><label>Jack Trout</label></div>
+        <br>
+    </ol>
+    <button onclick="checkAnswers()">Verificar respostas</button>
+</body>
+</html>
+
